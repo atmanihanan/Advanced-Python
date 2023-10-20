@@ -42,22 +42,20 @@ int main() {
     rate = (N*N*sizeof(double)*(1000/msec))/(1024*1024);
      // Output results
     printf("MXM not blocks : CPU Time = %f milliseconds, Bandwidth = %f GFLOPs\n", msec, rate);
-    
-     
+
+    //Block version
+     //Initialize matrice z = 0
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             z[i][j] = 0.0;
         }
     }
     
-    start =  (double)clock() /(double) CLOCKS_PER_SEC;
-
-
-     // BLOCK 
-      
      printf("entrer blocsize :");
      scanf("%d",&b);
      s = 0;
+     
+    start =  (double)clock() /(double) CLOCKS_PER_SEC;
      for (int kk = 0; kk<N; kk+=b)
         for(int jj = 0; jj<N; jj+=b)
           for(int i = 0; i <N; i++)
