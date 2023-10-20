@@ -24,7 +24,7 @@ int main() {
     }
 
     
-/*
+
     // Perform matrix multiplication
     start =  (double)clock() /(double) CLOCKS_PER_SEC;
     for (i = 0; i < N; ++i) {
@@ -39,19 +39,23 @@ int main() {
 
     // Calculate CPU time and bandwidth
     msec = ((double)(finish - start) * 1000.0) ;
-    rate = (*N*N*sizeof(double)*(1000/msec))/(1024*1024);
+    rate = (N*N*sizeof(double)*(1000/msec))/(1024*1024);
      // Output results
-    printf("CPU Time = %f milliseconds, Bandwidth = %f GFLOPs\n", msec, rate);
-    return 0;
-    */ 
+    printf("MXM not blocks : CPU Time = %f milliseconds, Bandwidth = %f GFLOPs\n", msec, rate);
     
+     
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            z[i][j] = 0.0;
+        }
+    }
     
     start =  (double)clock() /(double) CLOCKS_PER_SEC;
 
 
      // BLOCK 
       
-     printf("entrer blocsize");
+     printf("entrer blocsize :");
      scanf("%d",&b);
      s = 0;
      for (int kk = 0; kk<N; kk+=b)
@@ -64,10 +68,10 @@ int main() {
                         s  = s + x[i][j]*y[k][j];
                           z[i][j] = s;
                   }
-      
-      // Calculate CPU time and bandwidth
-    msec = ((double)(finish - start) * 100.0) ;
-    rate = (2*N*N*sizeof(double)*(1000/msec))/(1024*1024);
+          finish = (double)clock() /(double) CLOCKS_PER_SEC;
+      // Calculate CPU time and bandwidth.
+    msec = ((double)(finish - start) * 1000.0) ;
+    rate = (2*N*N*sizeof(double)*(1000.0/msec))/(1024*1024);
        // Output results
     printf("CPU Time = %f milliseconds, Bandwidth = %f GFLOPs\n", msec, rate);
     return 0;
